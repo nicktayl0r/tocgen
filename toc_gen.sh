@@ -9,17 +9,16 @@
 
 touch auto_toc.md
 
-TABLE_HEADER='Documentation for '
-
+dirname=${PWD##*/}
+TABLE_HEADER="| Documentation for $dirname | "
+echo $TABLE_HEADER > auto_toc.md
+echo '|---|' >> auto_toc.md
 
 # if the name is README.md then let the name of the link
 
-autotoc() {
-    touch autotoc.md
-    for md in `find . -name '*.md' -not -path '*node_modules*'`
-    do
-        echo $md
-    done
-}
-
-
+for md in `find . -name '*.md' -not -path '*node_modules*'`
+do
+    echo '| [test]('$md') |' >> auto_toc.md
+done
+cat auto_toc.md
+exit
